@@ -1,77 +1,68 @@
+#  Hardhat Project
 
-# create_a-token
-# Custom Token Contract
-The Custom Token Contract project aims to create a versatile and customizable token contract that can be deployed on the Ethereum blockchain. This contract enables users to mint and burn tokens, managing the total supply and individual balances. The contract includes public variables to store important details about the token, such as its name, abbreviation, and total supply. By implementing the mint function, users can increase the total supply and allocate tokens to specific addresses, while the burn function allows for the destruction of tokens by reducing the total supply and deducting tokens from a designated address. This project provides a solid foundation for building and managing custom tokens on the Ethereum platform.
-# Description
-This project aims to create a custom token contract that implements basic functionality such as minting and burning tokens. The contract will store details about the token, including its name, abbreviation, and total supply. It will also maintain a mapping of addresses to token balances. The mint function will increase the total supply and the balance of a specific address, while the burn function will decrease the total supply and the balance of an address, effectively destroying tokens.
-# Getting Started
-# Installing:
-To use this contract, you need a development environment with a Solidity compiler. You can install the Solidity compiler by following the instructions provided on the Solidity documentation website (https://soliditylang.org/).
-# Executing program
-To run this program, you can use Remix, an online Solidity IDE. To get started, go to the Remix website at https://remix.ethereum.org/.
+This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
 
-Once you are on the Remix website, create a new file by clicking on the "+" icon in the left-hand sidebar. Save the file with a .sol extension (e.g., HelloWorld.sol). Copy and paste the following code into the file:
-```javascript
-pragma solidity ^0.8.0;
+Try running some of the following tasks:
 
-contract MyToken {
-    // Public variables
-    string public tokenName = "META";
-    string public tokenSymbol = "MTA";
-    uint public totalSupply = 0;
+```shell
+npx hardhat help
+npx hardhat test
+REPORT_GAS=true npx hardhat test
+npx hardhat node
+npx hardhat run scripts/deploy.ts
+```
+# Connecting Local Hardhat Network with Remix
 
-    // Mapping variable
-    mapping(address => uint) public balances;
+Follow the steps below to connect your local Hardhat network with Remix and interact with a contract.
 
-    // Event emitted when tokens are minted or burned
-    event Transfer(address indexed from, address indexed to, uint value);
+## Step 1: Navigate to Project Directory
+Open your terminal and navigate to the project directory where your Solidity contract is located.
 
-    // Modifier to check if the caller is the owner
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Only the owner can call this function");
-        _;
-    }
+## Step 2: Run `remixd` Command
+In the terminal, run the following command to start the `remixd` service:
+```
+cd ~/Directory/remixd
+```
+Replace `<project_directory>` with the absolute path to your project directory. This will create a connection between Remix IDE and your local project directory.
 
-    // Owner of the contract
-    address public owner;
+## Step 3: Open Remix IDE
+Open your web browser and go to [Remix IDE](https://remix.ethereum.org).
 
-    // Constructor to set the owner
-    constructor() {
-        owner = msg.sender;
-    }
+## Step 4: Connect with Local Host
+In Remix IDE, click on the "Connect to Localhost" button in the top-right corner. This will establish a connection to your local Hardhat network.
 
-    // Mint function
-    function mint(address _address, uint _value) public onlyOwner {
-        totalSupply += _value;
-        balances[_address] += _value;
-        emit Transfer(address(0), _address, _value);
-    }
+## Step 5: Create a Contract
+In Remix IDE, click on the "+" button in the left panel to create a new file. Enter the Solidity code for your contract or `.sol` file in the editor.
 
-    // Burn function
-    function burn(address _address, uint _value) public onlyOwner {
-        if (balances[_address] >= _value) {
-            totalSupply -= _value;
-            balances[_address] -= _value;
-            emit Transfer(_address, address(0), _value);
-        }
-    }
+Example Contract:
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+contract Token {
+    // Contract code here...
 }
 ```
-Use the Solidity compiler to compile the "token_contract.sol" file into bytecode.
-Deploy the contract:
 
- Deploy the compiled bytecode to your preferred Ethereum development network or testnet using a tool like Remix or Truffle.
-Interact with the contract:
+## Step 6: Compile the Contract
+In the Remix IDE, switch to the "Solidity Compiler" tab in the left panel. Click on the "Compile" button to compile the contract. Make sure the compiler version matches the pragma statement in your contract.
 
- Once the contract is deployed, you can interact with it using a web3 provider or an Ethereum client library like web3.js or ethers.js.
-Call the mint function to increase the total supply and balance of an address.
-Call the burn function to decrease the total supply and balance of an address, effectively destroying tokens.
+## Step 7: Deploy and Interact with the Contract
+Switch to the "Deploy & Run Transactions" tab in the Remix IDE. From the "Environment" dropdown, select "Injected Web3" to connect to your local Hardhat network.
 
-# Help 
-If you encounter any issues or have questions, please refer to the Solidity documentation for more information on Solidity language features and smart contract development.
-# Authors
-Gaurav Kumar Saini
-@gauravkumar2410
+Click on the contract name under the "Deployed Contracts" section. You will see the contract's functions and variables. You can deploy the contract by clicking the "Deploy" button.
 
-# License
-This project is licensed under the MIT License - see the LICENSE.md file for details
+Once the contract is deployed, you can interact with its functions by entering the required parameters and clicking the respective function buttons.
+
+Congratulations! You have successfully connected your local Hardhat network with Remix and deployed/interacted with a contract.
+## Video Walkthrough
+
+[https://www.loom.com/share/56faefb9a47a4accae98ae6cc77b5385](https://www.loom.com/share/cc47d135b73b4c278a382c05918ce72c?sid=53e96a83-3cde-42c5-abaf-05279e57bf4c)
+
+
+Feel free to explore and modify the contract according to your needs!
+
+
+Note: Make sure your local Hardhat network is running (`npx hardhat node`) and that you have the necessary dependencies installed (`npm install`).
+
+Please refer to the provided code and adjust it to meet your specific contract requirements. Add relevant information and code in a structured manner within the `Token` contract.
